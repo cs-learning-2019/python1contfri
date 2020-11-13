@@ -5,7 +5,7 @@
 
 # Question 1
 # a)
-# [50, 100, 5, 50, 30, 10, -1]
+# [50, 500, 5, 50, 30, 10, -1]
 
 # b)
 # [6, 4, 5, 7, 8]
@@ -20,5 +20,5 @@
 names = ["John", "Bob", "Lu"]
 index = 0
 while index < len(names):
-    print("Hello, how are you " + names[index])
+    print("Hello, how are you, " + names[index] + "?")
     index = index + 1
