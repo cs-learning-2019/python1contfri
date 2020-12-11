@@ -1,10 +1,10 @@
 # Focus Learning
 # Animations Homework Solutions
 # Kavan Lam
-# Aug 25, 2020
+# Dec 11, 2020
 
-# Questions 1
 """
+# Questions 1
 x_pos = 100
 y_pos = 100
 speed = 3
@@ -33,11 +33,11 @@ def draw():
         speed = speed + 1
     elif x_pos <= 50:
         direction = 1
-        speed = speed + 1
-"""    
-
-# Questions 2
+        speed = speed + 1 
 """
+
+"""
+# Questions 2
 x_pos = 0
 y_pos = 0
 def setup():
@@ -56,7 +56,7 @@ def draw():
     # Move the square
     x_pos = x_pos + 5
     y_pos = y_pos + 5
-"""    
+""" 
 
 
 # Questions 3
