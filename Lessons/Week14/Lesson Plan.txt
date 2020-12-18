@@ -1,7 +1,3 @@
 1) How can we make something disappear when we click on it
 
-2) Review of all the code from the past (Students can ask about anything)
-
-3) Talk about upcoming game project
-
-4) Talk about assest loading
+2) Talk about projectiles and raycasting
