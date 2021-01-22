@@ -6,7 +6,7 @@
 
 # Homework
 """
-1) Make the circles go towards the character
+1) There is this werid issue where I can kill circles when I do not even click on it. Fix it.
 """
 
 # Steps
@@ -14,7 +14,8 @@
 # 2) Create the character (for now it will be a sqaure) and making it move using WASD (ensure that it does not leave the screen) [Done]
 # 3) Allow the chracter to shoot. Make a yellow laser. [Done]
 # 4) Spawn the circles (bad guys) [Done]
-# 5) Make the circles go towards the character
+# 5) Make the circles go towards the character [Done]
+# 6) The circles need to die when I shoot them
 
 character_size = 100
 character_x = 400
@@ -23,7 +24,7 @@ character_speed = 10
 
 circle_x = []
 circle_y = []
-circle_spawn_time = 50
+circle_spawn_time = 100
 
 def setup():
     size(900, 900)
@@ -49,25 +50,66 @@ def draw():
         temp_y = int(random(100, 800))
         circle_x.append(temp_x)
         circle_y.append(temp_y)
-        circle_spawn_time = 50
+        circle_spawn_time = 100
     
     # Draw the circles
     for index in range(0, len(circle_x)):
-        ellipse(circle_x[index], circle_y[index], 35, 35)
+        ellipse(circle_x[index], circle_y[index], 40, 40)
         
     # Move the cirlces (hint: you need to loop over all the circle just like we did above)
-    # blah 
-    # bLAH 
-    # blah
+    new_circle_x = []
+    new_circle_y = []
+    for index in range(0, len(circle_x)):
+        x_difference = character_x - circle_x[index]
+        y_difference = character_y - circle_y[index]
+        
+        if x_difference > 0:
+            x_difference = 1
+        elif x_difference < 0:
+            x_difference = -1
+        
+        if y_difference > 0:
+            y_difference = 1
+        elif y_difference < 0:
+            y_difference = -1
+        
+        new_circle_x.append(circle_x[index] + x_difference)
+        new_circle_y.append(circle_y[index] + y_difference)
+    
+    circle_x = new_circle_x
+    circle_y = new_circle_y
+        
+        
     
 def mousePressed():
     global character_x
     global character_y
+    global circle_x
+    global circle_y
     
     pushStyle()
     stroke(255, 255, 0)
     line(character_x + character_size / 2, character_y + character_size / 2, mouseX, mouseY)
     popStyle()
+    
+    # Detect to see if we hit a circle
+    alive_circle_x = []
+    alive_circle_y = []
+    for index in range(0, len(circle_x)):
+        # Check to see if this circle is bye bye
+        if mouseX >= circle_x[index] - 40 and mouseX <= circle_x[index] + 40:
+            if mouseY >= circle_y[index] - 40 and mouseY <= circle_y[index] + 40:
+                # The circle is dead we got it!!!
+                # Just do nothing
+                pass
+        else:
+            alive_circle_x.append(circle_x[index])
+            alive_circle_y.append(circle_y[index])
+        
+    
+    circle_x = alive_circle_x
+    circle_y = alive_circle_y
+    
     
 def keyPressed():
     global character_x
