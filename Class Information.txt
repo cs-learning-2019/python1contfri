@@ -2,7 +2,7 @@ Python Level 1 Continued
 Note: You should only be here if you already completed Python Level 0 in the Summer
 
 Link to Github
-https://github.com/cs-learning-2019/python1contfri
+https://github.com/cs-learning-2019/python1contmon
 
 You can find the homework under the Homework folder. It is organized by week number.
 Solutions will be provided after the due date
