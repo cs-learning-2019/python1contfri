@@ -1,7 +1,7 @@
 # Focus Learning: Python Level 1 Cont
 # Shoot Them Circles
 # Kavan Lam
-# Jan 29, 2021
+# Feb 8, 2021
 
 # Steps
 # 1) Setup the screen  [Done]
@@ -11,19 +11,36 @@
 # 5) Make the circles go towards the character [Done]
 # 6) The circles need to die when I shoot them [Done]
 # 7) The character needs to die when the circle touches the character [Done]
+# 8) Use pictures of kirby for the character instead of a white sqaure [Done]
 
 character_size = 100
 character_x = 400
 character_y = 400
 character_speed = 10
 character_alive = True
+kirby_pics = [] # index 0 --> right  1 --> left  2 --> up  3 --> down
+kirby_pic_index = 0
 
 circle_x = []
 circle_y = []
 circle_spawn_time = 100
 
 def setup():
+    global kirby_pics
+    
+    # Set the screen
     size(900, 900)
+    
+    # Load in the kirby pictures
+    pic0 = loadImage("kirby-right.jpg")
+    pic1 = loadImage("kirby-left.jpg")
+    pic2 = loadImage("kirby-up.jpg")
+    pic3 = loadImage("kirby-down.jpg")
+    kirby_pics.append(pic0)
+    kirby_pics.append(pic1)
+    kirby_pics.append(pic2)
+    kirby_pics.append(pic3)
+    
 
 def draw():
     global character_size
@@ -33,13 +50,16 @@ def draw():
     global circle_y
     global circle_spawn_time
     global character_alive
+    global kirby_pic_index
+    global kirby_pic
     
     # Clear the screen/previous frame
     background(0, 0, 0)
     
     if character_alive == True:
         # Draw the character
-        rect(character_x, character_y, character_size, character_size)
+        #rect(character_x, character_y, character_size, character_size)
+        image(kirby_pics[kirby_pic_index], character_x, character_y, character_size, character_size)
         
         # Spawn a circle
         circle_spawn_time = circle_spawn_time - 1
@@ -116,24 +136,29 @@ def keyPressed():
     global character_x
     global character_y
     global character_speed
+    global kirby_pic_index # index 0 --> right  1 --> left  2 --> up  3 --> down
     
     if key == "W" or key == "w":
         # The character should move up
+        kirby_pic_index = 2
         character_y = character_y - character_speed
         if character_y < 0:
             character_y = 0
     elif key == "A" or key == "a":
         # The character should move left
+        kirby_pic_index = 1
         character_x = character_x - character_speed
         if character_x < 0:
             character_x = 0
     elif key == "S" or key == "s":
         # The character should move down
+        kirby_pic_index = 3
         character_y = character_y + character_speed
         if character_y > 800:
             character_x = 800
     elif key == "D" or key == "d":
         # The character should move right
+        kirby_pic_index = 0
         character_x = character_x + character_speed
         if character_x > 800:
             character_x = 800
