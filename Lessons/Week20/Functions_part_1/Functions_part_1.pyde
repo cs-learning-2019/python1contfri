@@ -68,3 +68,14 @@ def funkyWord(word):
     print(cWord)
 
 funkyWord("HUmpy Dumpy")
+
+
+# Functions part 1 HW solutions (last page)
+print("------------------------------------")
+def box_maker(num):
+    print("*" * num)
+    for row in range(num - 2):
+        print("*" + " " * (num - 2) + "*")
+    print("*" * num)
+
+box_maker(9)
