@@ -1,0 +1,25 @@
+For homework answer the following questions. These questions are a bit harder than usual.
+I want to give you guys a small challenge.
+
+Question 1
+Write a function that takes a single integer as input. The function will draw circles
+with random color and location to the screen with size 50. The number of circles to draw
+is exactly the integer that is passed into the function. For example, if you pass the
+function 5 then there should be 5 circles drawn. Hint: you will need to generate random
+numbers and this will help https://processing.org/reference/random_.html
+
+def draw_the_circles(num_of_circles):
+    // Blah
+    // Blah
+
+
+Question 2
+Write a function that print out the first n Fibonacci Numbers. This website my help you
+https://www.mathsisfun.com/numbers/fibonacci-sequence.html
+Can you do it without using loops?
+Ex) fib(2) --> 0, 1
+    fib(6) --> 0, 1, 1, 2, 3, 5
+
+def fib(n):
+  // Blah
+  // Blah
