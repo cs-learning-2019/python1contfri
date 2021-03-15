@@ -1,0 +1,6 @@
+1) Take up homework
+2) Finish up Functions
+- Talk about default parameters and show two examples
+- Talk about how multiple functions can be used together to solve a problem
+- Show example of computing a complicated equation
+- Show example of generating a student progress report given a list of num (grades)
