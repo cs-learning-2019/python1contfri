@@ -1,11 +1,10 @@
 # Focus Learning: Python Level 1 cont 
 # PONG
 # Kavan Lam
-# March 29, 2021
+# April 12, 2021
 
 ###### HOMEWORK ######
-# 1) Finish off the player 2 controls
-# 2) Get the ball moving. All you need to do is make is move in any random direction of your choice.
+# No Homework
 
 player1_x = 50
 player1_y = 220
@@ -17,6 +16,8 @@ player2_speed = 15
 
 ball_x = 500
 ball_y = 300
+ball_speed = 3
+ball_direction = [-1, 0.5]
 ball_size = 30
 
 def setup():
@@ -31,6 +32,8 @@ def draw():
     
     global ball_x
     global ball_y
+    global ball_speed
+    global ball_direction
     global ball_size
     
     # Clear the previous frame
@@ -62,6 +65,11 @@ def draw():
     ellipse(ball_x, ball_y, ball_size, ball_size)
     popStyle()
     
+    # Move the ball
+    ball_x = ball_x + ball_speed * ball_direction[0]
+    ball_y = ball_y + ball_speed * ball_direction[1]
+    
+    
 def keyPressed():
     global player1_y
     global player1_speed
@@ -80,14 +88,16 @@ def keyPressed():
         if player1_y > 500:
             player1_y = 500
 
-
     # Player 2
     if keyCode == UP: # Move up
         player2_y = player2_y - player2_speed
-    # HW Finish the player two controls
-    
-    
-    
+        if player2_y < 0:
+            player2_y = 0
+    elif keyCode == DOWN: # Move down
+        player2_y = player2_y + player2_speed
+        if player2_y > 500:
+            player2_y = 500
+
     
     
     
