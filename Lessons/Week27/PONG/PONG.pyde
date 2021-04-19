@@ -1,10 +1,11 @@
 # Focus Learning: Python Level 1 cont 
 # PONG
 # Kavan Lam
-# April 12, 2021
+# April 19, 2021
 
 ###### HOMEWORK ######
-# No Homework
+# 1) Make the ball bounce off of player 2
+# 2) Make the ball bonuce off the top and bottom wall as well
 
 player1_x = 50
 player1_y = 220
@@ -17,7 +18,7 @@ player2_speed = 15
 ball_x = 500
 ball_y = 300
 ball_speed = 3
-ball_direction = [-1, 0.5]
+ball_direction = [-1, 0]
 ball_size = 30
 
 def setup():
@@ -69,7 +70,15 @@ def draw():
     ball_x = ball_x + ball_speed * ball_direction[0]
     ball_y = ball_y + ball_speed * ball_direction[1]
     
-    
+    # Detect the ball hitting the player 1 paddle
+    if (ball_y >= player1_y and ball_y <= player1_y + 100) and (ball_x >= player1_x - 5 and ball_x <= player1_x + 5):
+        if ball_direction[0] == -1:
+            ball_direction[0] = 1
+        elif ball_direction[0] == 1:
+            ball_direction[0] = -1
+        
+        ball_direction[1] = random(-1, 1)
+                
 def keyPressed():
     global player1_y
     global player1_speed

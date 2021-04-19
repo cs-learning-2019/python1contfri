@@ -1,1 +1,3 @@
-TBD
+###### HOMEWORK ######
+# 1) Make the ball bounce off of player 2
+# 2) Make the ball bonuce off the top and bottom wall as well
