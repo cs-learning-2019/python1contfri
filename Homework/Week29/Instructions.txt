@@ -1,1 +1,4 @@
-TBD
+###### HOMEWORK ######
+# 1) Detect the ball hitting the left wall (player 2 has scored)
+# 2) Display player 2 score
+# 3) Add music

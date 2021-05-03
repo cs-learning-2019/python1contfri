@@ -1,19 +1,24 @@
 # Focus Learning: Python Level 1 cont 
 # PONG
 # Kavan Lam
-# April 26, 2021
+# May 3, 2021
 
 ###### HOMEWORK ######
-# No homework
+# 1) Detect the ball hitting the left wall (player 2 has scored)
+# 2) Display player 2 score
+# 3) Add music
 
 ###### TODO #######
-# 1) Add music
-# 2) Make scoring possible  [in progress]
+# 1) The game does not end (Game over screen) (with a reset button)
+
+scene = 1  # 0 -> Main Menu   1 -> Game    2 -> Game Over
+max_score = 2
+winning_player = 0  # 0 -> Do not know   1 -> Player 1 won   2 -> Player 2 won
 
 player1_x = 50
 player1_y = 220
 player1_speed = 15
-player1_score = 0 
+player1_score = 0
 
 player2_x = 950
 player2_y = 220
@@ -30,6 +35,28 @@ def setup():
     size(1000, 600)
 
 def draw():
+    global scene
+    
+    if scene == 1:
+        draw_game()
+    elif scene == 2:
+        draw_game_over()
+    
+def draw_game_over():
+    global winning_player
+    
+    background(0, 255, 0)
+    textAlign(CENTER)
+    fill(255, 0, 0)
+    textSize(40)
+    text("Game Over", 500, 300)
+    
+    if winning_player == 1:
+        text("Player 1 has won", 500, 400)
+    elif winning_player == 2:
+        text("Player 2 has won", 500, 400)
+    
+def draw_game():
     global player1_x
     global player1_y
     global player1_score
@@ -43,6 +70,10 @@ def draw():
     global ball_speed
     global ball_direction
     global ball_size
+    
+    global scene
+    global max_score
+    global winning_player
     
     # Clear the previous frame
     background(0, 0, 0)
@@ -104,12 +135,34 @@ def draw():
     # Detect the ball hitting the bottom wall
     if (ball_y >= 600 - 15):
         ball_direction[1] = random(-1, 0)
-        
-    # Detect the ball hitting the left wall (player 2 has scored)
-    #player2_score = player2_score + 1
+    
+    # Draw player 1 score
+    pushStyle()
+    textSize(25)
+    fill(0, 255, 0)
+    text(player1_score, 50, 50)
+    popStyle()
+    
+    # Draw player 2 score  [HOMEWORK]
     
     # Detect the ball hitting the right wall (player 1 has scored)
-    #player1_score = player1_score + 1
+    if ball_x >= 1000:
+        player1_score = player1_score + 1
+        ball_x = 500
+        ball_y = 300
+        ball_speed = 2
+        ball_direction = [-1, 0]
+        
+    # Detect the ball hitting the left wall (player 2 has scored)  [HOMEWORK]    
+    
+    # Check to see if any player has reached the max score
+    if player1_score == max_score:
+        scene = 2 
+        winning_player = 1
+    elif player2_score == max_score:
+        scene = 2 
+        winning_player = 2
+
                 
 def keyPressed():
     global player1_y
