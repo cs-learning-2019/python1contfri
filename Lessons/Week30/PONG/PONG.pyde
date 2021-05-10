@@ -1,18 +1,20 @@
 # Focus Learning: Python Level 1 cont 
 # PONG
 # Kavan Lam
-# May 3, 2021
+# May 10, 2021
 
 ###### HOMEWORK ######
-# 1) Detect the ball hitting the left wall (player 2 has scored)
-# 2) Display player 2 score
-# 3) Add music
+# NO HOMEWORK
 
 ###### TODO #######
 # 1) The game does not end (Game over screen) (with a reset button)
 
+add_library("minim")
+game_music_on = False
+game_over_music_on = False
+
 scene = 1  # 0 -> Main Menu   1 -> Game    2 -> Game Over
-max_score = 2
+max_score = 1
 winning_player = 0  # 0 -> Do not know   1 -> Player 1 won   2 -> Player 2 won
 
 player1_x = 50
@@ -32,7 +34,15 @@ ball_direction = [1, 0]
 ball_size = 30
 
 def setup():
+    global my_game_music
+    global my_other_music
+    global minim
+    
     size(1000, 600)
+    
+    minim = Minim(this) # We are creating a dvd player a putting it into minim variable
+    my_game_music = minim.loadFile("game_music.mp3")
+    my_other_music = minim.loadFile("music2.mp3")
 
 def draw():
     global scene
@@ -44,6 +54,10 @@ def draw():
     
 def draw_game_over():
     global winning_player
+    global game_music_on
+    global game_over_music_on
+    global my_other_music
+    global minim
     
     background(0, 255, 0)
     textAlign(CENTER)
@@ -55,6 +69,13 @@ def draw_game_over():
         text("Player 1 has won", 500, 400)
     elif winning_player == 2:
         text("Player 2 has won", 500, 400)
+    
+    game_music_on = False
+    if game_over_music_on == False:
+        minim.stop()
+        my_other_music = minim.loadFile("music2.mp3")
+        my_other_music.loop()
+        game_over_music_on = True
     
 def draw_game():
     global player1_x
@@ -74,9 +95,18 @@ def draw_game():
     global scene
     global max_score
     global winning_player
+    global my_game_music
+    global game_music_on
+    global game_over_music_on
     
     # Clear the previous frame
     background(0, 0, 0)
+    
+    # play music
+    game_over_music_on = False
+    if game_music_on == False:
+        my_game_music.loop()
+        game_music_on = True
     
     # Draw the center line
     pushStyle()
@@ -143,7 +173,12 @@ def draw_game():
     text(player1_score, 50, 50)
     popStyle()
     
-    # Draw player 2 score  [HOMEWORK]
+    # Draw player 2 score
+    pushStyle()
+    textSize(25)
+    fill(0, 255, 0)
+    text(player2_score, 950, 50)
+    popStyle()
     
     # Detect the ball hitting the right wall (player 1 has scored)
     if ball_x >= 1000:
@@ -153,7 +188,13 @@ def draw_game():
         ball_speed = 2
         ball_direction = [-1, 0]
         
-    # Detect the ball hitting the left wall (player 2 has scored)  [HOMEWORK]    
+    # Detect the ball hitting the left wall (player 2 has scored)
+    if ball_x <= 0:
+        player2_score = player2_score + 1
+        ball_x = 500
+        ball_y = 300
+        ball_speed = 2
+        ball_direction = [1, 0]
     
     # Check to see if any player has reached the max score
     if player1_score == max_score:
