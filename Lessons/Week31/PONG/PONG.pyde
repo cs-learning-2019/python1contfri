@@ -1,13 +1,10 @@
 # Focus Learning: Python Level 1 cont 
 # PONG
 # Kavan Lam
-# May 10, 2021
+# May 17, 2021
 
 ###### HOMEWORK ######
-# NO HOMEWORK
-
-###### TODO #######
-# 1) The game does not end (Game over screen) (with a reset button)
+# Create a main menu for the game
 
 add_library("minim")
 game_music_on = False
@@ -63,12 +60,12 @@ def draw_game_over():
     textAlign(CENTER)
     fill(255, 0, 0)
     textSize(40)
-    text("Game Over", 500, 300)
+    text("Game Over", 500, 200)
     
     if winning_player == 1:
-        text("Player 1 has won", 500, 400)
+        text("Player 1 (left) has won", 500, 300)
     elif winning_player == 2:
-        text("Player 2 has won", 500, 400)
+        text("Player 2 (right) has won", 500, 300)
     
     game_music_on = False
     if game_over_music_on == False:
@@ -76,6 +73,13 @@ def draw_game_over():
         my_other_music = minim.loadFile("music2.mp3")
         my_other_music.loop()
         game_over_music_on = True
+    
+    # Reset button
+    pushStyle()
+    rect(400, 400, 200, 50)
+    fill(0, 0, 255)
+    text("Reset", 500, 438)
+    popStyle()
     
 def draw_game():
     global player1_x
@@ -98,6 +102,7 @@ def draw_game():
     global my_game_music
     global game_music_on
     global game_over_music_on
+    global minim
     
     # Clear the previous frame
     background(0, 0, 0)
@@ -105,6 +110,7 @@ def draw_game():
     # play music
     game_over_music_on = False
     if game_music_on == False:
+        my_game_music = minim.loadFile("game_music.mp3")
         my_game_music.loop()
         game_music_on = True
     
@@ -231,3 +237,63 @@ def keyPressed():
         player2_y = player2_y + player2_speed
         if player2_y > 500:
             player2_y = 500
+            
+def mousePressed():
+    global game_music_on
+    global game_over_music_on
+    
+    global scene
+    global winning_player
+    
+    global player1_x
+    global player1_y
+    global player1_speed
+    global player1_score
+    
+    global player2_x
+    global player2_y
+    global player2_speed
+    global player2_score
+    
+    global ball_x
+    global ball_y
+    global ball_speed
+    global ball_direction
+    global ball_size
+    
+    global minim
+    
+    if scene == 1:
+        pass
+    elif scene == 2:  # Game over screen
+        if (mouseX >= 400 and mouseX <= 600) and (mouseY >= 400 and mouseY <= 450):
+            # Reset the game
+            game_music_on = False
+            game_over_music_on = False
+            minim.stop()
+            
+            scene = 1
+            winning_player = 0
+            
+            player1_x = 50
+            player1_y = 220
+            player1_speed = 15
+            player1_score = 0
+            
+            player2_x = 950
+            player2_y = 220
+            player2_speed = 15
+            player2_score = 0
+            
+            ball_x = 500
+            ball_y = 300
+            ball_speed = 2
+            ball_direction = [1, 0]
+            ball_size = 30
+        
+        
+    
+    
+    
+    
+    
