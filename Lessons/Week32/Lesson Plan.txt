@@ -1,0 +1,3 @@
+1) Take up the main menu for PONG
+
+2) Introduce the final project
