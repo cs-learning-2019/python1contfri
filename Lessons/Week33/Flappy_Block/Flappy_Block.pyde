@@ -62,7 +62,7 @@ def draw():
         textSize(50)
         fill(255, 255, 0)
         text("Game Over!", 290, 100)
-        text("Score: " + str(<----------------------------->), 290, 150)
+        text("Score: " + str(score), 290, 150)
     else:
         play_game()
 
@@ -87,7 +87,7 @@ def play_game():
     # Draw the bird
     image(bird_img, <----------------------------->, bird_y, 60, 60)
     
-    # Draw the wall
+    # Draw the wall (the wall is the pipe in the game)
     # Start with top part
     fill(255, 0, 0)
     rect(<----------------------------->, 0, 60, wall_width)
